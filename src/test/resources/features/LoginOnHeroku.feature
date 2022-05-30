@@ -1,4 +1,4 @@
-@appium
+@appium @appiumBrowser
 
 Feature: Searching a term on google
 

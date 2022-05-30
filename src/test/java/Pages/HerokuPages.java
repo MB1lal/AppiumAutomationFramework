@@ -1,32 +1,24 @@
 package Pages;
 
 
+import driver.DriverBase;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class HerokuPages extends DriverBase {
 
-public class HerokuPages {
-
-    private AppiumDriver driver;
-
-    By userNameTextbox = By.cssSelector("input#username");
-    By passwordTextbox = By.cssSelector("input#password");
+    private static AppiumDriver driver;
+    By userNameTextbox = By.id("username");
+    By passwordTextbox = By.id("password");
     By loginButton = By.cssSelector("button.radius");
 
-    public HerokuPages(IOSDriver driver) {
-        this.driver = driver;
+    public HerokuPages() {
+        driver = getAppiumDriver();
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
@@ -36,8 +28,8 @@ public class HerokuPages {
 
     public void enterUsername(String userName) {
         driver.findElement(userNameTextbox).click();
-        driver.getKeyboard().sendKeys(userName);
-//        driver.findElement(userNameTextbox).sendKeys(userName);
+//        driver.getKeyboard().sendKeys(userName);
+        driver.findElement(userNameTextbox).sendKeys(userName);
     }
 
     public void enterPassword(String password) {

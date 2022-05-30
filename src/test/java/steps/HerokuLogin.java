@@ -5,14 +5,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.core.Serenity;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static utils.SharedStateConstants.APPIUM_DRIVER;
 
 public class HerokuLogin extends BaseSteps{
 
-    HerokuPages herokuPages = new HerokuPages(Serenity.sessionVariableCalled(APPIUM_DRIVER));
+    HerokuPages herokuPages = new HerokuPages();
 
     @Given("User navigates to heroku")
     public void user_navigates_to_heroku() {
