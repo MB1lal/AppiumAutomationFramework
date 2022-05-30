@@ -1,6 +1,6 @@
 @appium @appiumBrowser
 
-Feature: Searching a term on google
+Feature: Testing Heroku Web App
 
   Background: Check for internet connectivity
     Given User has internet connectivity

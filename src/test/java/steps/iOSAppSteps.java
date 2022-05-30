@@ -13,10 +13,6 @@ public class iOSAppSteps extends BaseSteps {
     @Steps
      TestAppPage testAppPage;
 
-    public iOSAppSteps(TestAppPage testAppPage) {
-        this.testAppPage = testAppPage;
-    }
-
     @Given("User inputs {int} as {string} number")
     public void verifyAppIsLaunched(int number, String numberField) {
         logger.info("App launched");
