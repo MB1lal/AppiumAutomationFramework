@@ -5,7 +5,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import static org.assertj.core.api.Assertions.assertThat;
+
+import static org.junit.Assert.assertTrue;
 
 public class HerokuLogin extends BaseSteps{
 
@@ -26,7 +27,7 @@ public class HerokuLogin extends BaseSteps{
     }
     @Then("User should be logged in")
     public void user_should_be_logged_in() {
-        assertThat(herokuPages.userIsLoggedIn()).isTrue();
+        assertTrue(herokuPages.userIsLoggedIn());
     }
 
     @And("User logs out")

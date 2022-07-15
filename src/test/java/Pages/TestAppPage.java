@@ -1,19 +1,11 @@
 package Pages;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
-import static driver.DriverBase.getAppiumDriver;
-
-public class TestAppPage {
-
-    TestAppPage(){
-        PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
-    }
+public class TestAppPage extends AppiumBaseScreen {
     @AndroidFindBy(id ="IntegerA")
     @iOSXCUITFindBy(accessibility = "IntegerA")
     private WebElement txtFirstNumberField;
@@ -30,20 +22,20 @@ public class TestAppPage {
     @iOSXCUITFindBy(accessibility = "Answer")
     private WebElement lblSumResults;
 
-    @Step("Enter numbers into fields")
+    @Step("Enter 1st number")
     public void enterFirstNumber(int number) {
-        txtFirstNumberField.click();
-        txtFirstNumberField.sendKeys(String.valueOf(number));
+        setText(String.valueOf(number), txtFirstNumberField);
     }
-
+    @Step("Enter 2nd number")
     public void enterSecondNumber(int number) {
-        txtFirstNumberField.sendKeys(String.valueOf(number));
+        setText(String.valueOf(number), txtSecondNumberField);
     }
-
+    @Step("Press sum button")
     public void pressSumButton() {
         btnComputeSum.click();
     }
 
+    @Step("Return sum of numbers")
     public String getSumOfNumbers() {
         return lblSumResults.getText();
     }

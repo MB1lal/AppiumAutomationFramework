@@ -5,8 +5,7 @@ import io.cucumber.java.en.Given;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class InternetCheckSteps extends BaseSteps{
 
@@ -23,8 +22,7 @@ public class InternetCheckSteps extends BaseSteps{
         catch (Exception e) {
             isConnected = false;
         }
-
-        assertThat(isConnected).as("Internet not connected").isTrue();
+        assertTrue(isConnected);
     }
 
 }

@@ -6,16 +6,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
-public class iOSAppSteps extends BaseSteps {
+public class IOSAppSteps extends BaseSteps {
 
     @Steps
-     TestAppPage testAppPage;
+    TestAppPage testAppPage;
 
     @Given("User inputs {int} as {string} number")
     public void verifyAppIsLaunched(int number, String numberField) {
-        logger.info("App launched");
         switch (numberField.toLowerCase()) {
             case "first" -> testAppPage.enterFirstNumber(number);
             case "second" -> testAppPage.enterSecondNumber(number);
@@ -29,7 +28,6 @@ public class iOSAppSteps extends BaseSteps {
 
     @Then("The sum should be {int}")
     public void verifySumIsCorrect(int result) {
-        assertThat(testAppPage.getSumOfNumbers())
-                .isEqualTo(String.valueOf(result));
+        assertEquals(testAppPage.getSumOfNumbers(),String.valueOf(result));
     }
 }
