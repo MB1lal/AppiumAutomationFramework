@@ -5,7 +5,9 @@ import io.appium.java_client.safari.options.SafariOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
 
 import java.net.MalformedURLException;
@@ -19,8 +21,8 @@ public class Hooks extends BaseSteps{
     public static URL url;
     private static AppiumDriverLocalService service;
 
-    @Before(value = "@appium", order = 0)
-    public void startAppiumService() {
+    @BeforeAll
+    public static void startAppiumService() {
         service = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
@@ -60,8 +62,8 @@ public class Hooks extends BaseSteps{
         }
     }
 
-    @After(value = "@appium")
-    public void tearDownAppium() {
+    @AfterAll
+    public static void tearDownAppium() {
         closeDriver();
         service.stop();
     }

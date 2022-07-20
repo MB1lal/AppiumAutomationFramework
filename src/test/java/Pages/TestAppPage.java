@@ -3,6 +3,7 @@ package Pages;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 public class TestAppPage extends AppiumBaseScreen {
@@ -22,6 +23,22 @@ public class TestAppPage extends AppiumBaseScreen {
     @iOSXCUITFindBy(accessibility = "Answer")
     private WebElement lblSumResults;
 
+    @AndroidFindBy(id ="show alert")
+    @iOSXCUITFindBy(accessibility = "show alert")
+    private WebElement btnShowAlert;
+
+    @AndroidFindBy(id ="Cool title")
+    @iOSXCUITFindBy(accessibility = "Cool title")
+    private WebElement lblAlertTitle;
+
+    @AndroidFindBy(id ="OK")
+    @iOSXCUITFindBy(accessibility = "OK")
+    private WebElement btnAlertOk;
+
+    @AndroidFindBy(id ="Cancel")
+    @iOSXCUITFindBy(accessibility = "Cancel")
+    private WebElement btnAlertCancel;
+
     @Step("Enter 1st number")
     public void enterFirstNumber(int number) {
         txtFirstNumberField.clear();
@@ -40,6 +57,25 @@ public class TestAppPage extends AppiumBaseScreen {
     @Step("Return sum of numbers")
     public String getSumOfNumbers() {
         return lblSumResults.getText();
+    }
+
+    @Step
+    public void clickOnAlertButton() {
+        btnShowAlert.click();
+    }
+
+    @Step
+    public boolean alertIsDisplayed() {
+        try{
+            return lblAlertTitle.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    @Step
+    public void clickOkayButton() {
+        btnAlertOk.click();
     }
 
 }
