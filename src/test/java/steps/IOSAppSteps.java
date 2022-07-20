@@ -16,8 +16,8 @@ public class IOSAppSteps extends BaseSteps {
     @Given("User inputs {int} as {string} number")
     public void verifyAppIsLaunched(int number, String numberField) {
         switch (numberField.toLowerCase()) {
-            case "first" -> testAppPage.enterFirstNumber(number);
-            case "second" -> testAppPage.enterSecondNumber(number);
+            case "first": testAppPage.enterFirstNumber(number);
+            case "second": testAppPage.enterSecondNumber(number);
         }
     }
 

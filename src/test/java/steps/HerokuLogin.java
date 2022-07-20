@@ -5,16 +5,18 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.thucydides.core.annotations.Steps;
 
 import static org.junit.Assert.assertTrue;
 
 public class HerokuLogin extends BaseSteps{
 
-    HerokuPages herokuPages = new HerokuPages();
+    @Steps
+    HerokuPages herokuPages;
 
     @Given("User navigates to heroku")
     public void user_navigates_to_heroku() {
-        herokuPages.open();
+        herokuPages.navigateToHerokuLogin();
     }
     @And("User enters username and password")
     public void user_enters_username_and_password() {

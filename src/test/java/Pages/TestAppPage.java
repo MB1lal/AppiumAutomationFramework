@@ -24,11 +24,13 @@ public class TestAppPage extends AppiumBaseScreen {
 
     @Step("Enter 1st number")
     public void enterFirstNumber(int number) {
-        setText(String.valueOf(number), txtFirstNumberField);
+        txtFirstNumberField.clear();
+        txtFirstNumberField.sendKeys(String.valueOf(number));
     }
     @Step("Enter 2nd number")
     public void enterSecondNumber(int number) {
-        setText(String.valueOf(number), txtSecondNumberField);
+        txtSecondNumberField.clear();
+        txtSecondNumberField.sendKeys(String.valueOf(number));
     }
     @Step("Press sum button")
     public void pressSumButton() {
