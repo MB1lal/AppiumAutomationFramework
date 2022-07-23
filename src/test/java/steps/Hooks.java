@@ -1,70 +1,75 @@
 package steps;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.IOSMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.cucumber.java.After;
+import io.appium.java_client.ios.options.XCUITestOptions;
+import io.appium.java_client.safari.options.SafariOptions;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.ServerArgument;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
-import net.serenitybdd.core.Serenity;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static utils.SharedStateConstants.APPIUM_DRIVER;
-import static utils.SharedStateConstants.EXCEL_DATA;
+import static driver.DriverBase.closeDriver;
+import static driver.DriverBase.initializeDriver;
 
 public class Hooks extends BaseSteps{
 
     public static URL url;
-    public static DesiredCapabilities capabilities;
-    public static AppiumDriver driver;
+    private static AppiumDriverLocalService service;
 
-
-    @Before(value = "@appium")
-    public void setupAppium () throws MalformedURLException {
-        final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
+    @BeforeAll
+    public static void startAppiumService() {
+        service = new AppiumServiceBuilder()
+                .withIPAddress("127.0.0.1")
+                .usingPort(4723)
+                .build();
+        service.start();
+        try {
+            Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Before(value = "@appium", order = 1)
+    public void setupAppium(Scenario scenario) throws MalformedURLException {
+        final String URL_STRING = service.getUrl().toString();
         url = new URL(URL_STRING);
 
-        capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability("safari:useSimulator", true);
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 13 mini");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "15.4");
-        capabilities.setCapability(IOSMobileCapabilityType.BROWSER_NAME, "Safari");
-//        capabilities.setCapability(MobileCapabilityType.AUTO_WEBVIEW, true);
+        if(scenario.getSourceTagNames().contains("@appiumApp")) {
+            XCUITestOptions capabilities = new XCUITestOptions()
+                    .setDeviceName("iPhone 13 mini")
+                    .setAutomationName("XCUITest")
+                    .setPlatformVersion("15.5")
+                    .setPlatformName("iOS")
+                    .setApp("/Users/bilal/Documents/ios-test-app/build/Release-iphonesimulator/TestApp-iphonesimulator.app");
 
-//        capabilities.setCapability(MobileCapabilityType.UDID,"41E1C392-6EED-488B-9B44-72ED0373845A");
-        // MobileCapabilityType.APP is set to the IOS app bundle file path that was created in Step 1. Replace it with your app bundle file path.
-//        capabilities
-//                .setCapability(MobileCapabilityType.APP,
-//                        "/Users/bilal/Library/Developer/Xcode/DerivedData/SafariLauncher-edpmjfhkqiqppmdglqunogjilhvx/Build/Products/Debug-iphonesimulator/SafariLauncher.app");
+            initializeDriver(url,capabilities);
+        }
+        else if(scenario.getSourceTagNames().contains("@appiumBrowser")) {
+            SafariOptions capabilities = new SafariOptions()
+                    .setPlatformVersion("15.5")
+                    .setAutomationName("Safari")
+                    .setSafariDeviceName("iPhone 13 mini")
+                    .setSafariUseSimulator(true)
+                    .setPlatformName("iOS");
 
-        driver = new IOSDriver(url, capabilities);
-        Serenity.setSessionVariable(APPIUM_DRIVER).to(driver);
-        logger.info("SessionId : " + driver.getSessionId());
+            initializeDriver(url, capabilities);
+        }
     }
 
-    @After(value = "@appium")
-    public void tearDownAppium() {
-        driver.quit();
+    @AfterAll
+    public static void tearDownAppium() {
+        closeDriver();
+        service.stop();
     }
 
     @Before
     public void bootstrap(Scenario scenario) {
-        if(scenario.getSourceTagNames().contains("@excelData")) {
-            utils.ExcelReader excelReader = utils.ExcelReader.getInstance();
-            try
-            {
-                Serenity.setSessionVariable(EXCEL_DATA).to(excelReader.readExcel("Input"));
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+
     }
 }
