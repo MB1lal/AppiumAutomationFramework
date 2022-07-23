@@ -1,10 +1,20 @@
-package Pages;
+package pages;
 
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.touch.offset.PointOption;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+
+import static driver.DriverBase.getAppiumDriver;
+import static java.time.Duration.ofMillis;
 
 public class TestAppPage extends AppiumBaseScreen {
     @AndroidFindBy(id ="IntegerA")
@@ -38,6 +48,14 @@ public class TestAppPage extends AppiumBaseScreen {
     @AndroidFindBy(id ="Cancel")
     @iOSXCUITFindBy(accessibility = "Cancel")
     private WebElement btnAlertCancel;
+
+    @AndroidFindBy(xpath ="//XCUIElementTypeSlider[@name='AppElem']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeSlider[@name='AppElem']")
+    private WebElement slider;
+
+    @AndroidFindBy(id ="Test Gesture")
+    @iOSXCUITFindBy(accessibility = "Test Gesture")
+    private WebElement btnTestGesture;
 
     @Step("Enter 1st number")
     public void enterFirstNumber(int number) {
@@ -78,4 +96,24 @@ public class TestAppPage extends AppiumBaseScreen {
         btnAlertOk.click();
     }
 
+    public void slideTo(String slidingDirection) {
+        switch(slidingDirection.toLowerCase()) {
+            case "left":
+                slider.sendKeys("0.2");
+                break;
+            case "right":
+                slider.sendKeys("0.7");
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid sliding direction");
+        }
+    }
+
+    public String getSliderPercent() {
+        return getAttributeValue(slider,"value");
+    }
+
+    public void clickTestGesture() {
+        btnTestGesture.click();
+    }
 }

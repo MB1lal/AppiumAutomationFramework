@@ -1,40 +1,45 @@
 package steps;
 
-import Pages.HerokuPages;
+import pages.HerokuPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HerokuLogin extends BaseSteps{
 
     @Steps
-    HerokuPages herokuPages;
+    HerokuPage herokuPage;
 
     @Given("User navigates to heroku")
     public void user_navigates_to_heroku() {
-        herokuPages.navigateToHerokuLogin();
+        herokuPage.navigateToHerokuLogin();
     }
     @And("User enters username and password")
     public void user_enters_username_and_password() {
-       herokuPages.enterUsername("tomsmith");
-       herokuPages.enterPassword("SuperSecretPassword!");
+       herokuPage.enterUsername("tomsmith");
+       herokuPage.enterPassword("SuperSecretPassword!");
     }
     @When("User presses login button")
     public void user_presses_login_button() {
-        herokuPages.clickLogin();
+        herokuPage.clickLogin();
     }
     @Then("User should be logged in")
     public void user_should_be_logged_in() {
-        assertTrue(herokuPages.userIsLoggedIn());
+        assertThat(herokuPage.userIsLoggedIn()).isTrue();
     }
 
     @And("User logs out")
     public void logoutUser() {
-        herokuPages.logout();
+        herokuPage.logout();
+    }
+
+    @And("User is logged out")
+    public void user_Should_be_logged_out() {
+        assertThat(herokuPage.userIsLoggedOut()).isTrue();
     }
 
 

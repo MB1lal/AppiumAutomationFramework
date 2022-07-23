@@ -4,7 +4,7 @@ import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.safari.options.SafariOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.cucumber.java.After;
+import io.appium.java_client.service.local.flags.ServerArgument;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;

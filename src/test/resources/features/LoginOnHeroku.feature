@@ -11,3 +11,4 @@ Feature: Testing Heroku Web App
     When User presses login button
     Then User should be logged in
     And User logs out
+    And User is logged out

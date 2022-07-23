@@ -1,11 +1,11 @@
-package Pages;
+package pages;
 
 
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HerokuPages extends AppiumBaseScreen {
+public class HerokuPage extends AppiumBaseScreen {
 
     @FindBy(id = "username")
     private WebElement userNameTextbox;
@@ -13,7 +13,7 @@ public class HerokuPages extends AppiumBaseScreen {
     private WebElement passwordTextbox;
     @FindBy(css = "button.radius")
     private WebElement loginButton;
-    @FindBy(linkText = "logout")
+    @FindBy(xpath = "//*[@class='button secondary radius']")
     private WebElement logoutButton;
 
     @Step
@@ -30,7 +30,8 @@ public class HerokuPages extends AppiumBaseScreen {
     }
     @Step
     public void clickLogin() {
-       loginButton.click();
+        loginButton.click();
+//        passwordTextbox.sendKeys("\n"); // Above click isn't working for some reason anymore
     }
     @Step
     public boolean userIsLoggedIn() {
@@ -40,5 +41,10 @@ public class HerokuPages extends AppiumBaseScreen {
     @Step
     public void logout() {
         logoutButton.click();
+    }
+    @Step
+    public boolean userIsLoggedOut() {
+        waitUntilURLContains("login");
+        return pageContainsText("You logged out of the secure area!");
     }
 }

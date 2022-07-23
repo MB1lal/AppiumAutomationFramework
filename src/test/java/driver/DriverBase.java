@@ -29,7 +29,6 @@ public class DriverBase {
         driver = new IOSDriver(appiumURL, capabilities);
     }
     public static void closeDriver() {
-//        driver.close();
         driver.quit();
     }
 }
