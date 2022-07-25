@@ -22,8 +22,7 @@
       When User slides the slider to right
       Then The slider percentage > 50%
 
-      @InProgress
-      Scenario: Testing gesture
+      Scenario: Testing gestures
         Given User clicks on test gesture
         When User pans the screen to the right
         Then Map now displays Qatar
