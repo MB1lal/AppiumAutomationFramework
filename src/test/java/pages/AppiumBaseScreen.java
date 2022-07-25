@@ -1,14 +1,11 @@
 package pages;
 
 
-import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.RemoteWebElement;
-import org.openqa.selenium.remote.http.HttpMethod;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static driver.DriverBase.getAppiumDriver;
-import static java.util.Collections.singletonList;
 
 public class AppiumBaseScreen {
 

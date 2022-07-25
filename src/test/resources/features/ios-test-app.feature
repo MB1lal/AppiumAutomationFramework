@@ -1,4 +1,4 @@
-@appium @appiumApp
+@appium @appiumApp @iOS
 
   Feature: Testing iOS App
 

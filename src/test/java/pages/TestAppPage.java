@@ -1,20 +1,10 @@
 package pages;
 
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import io.appium.java_client.touch.offset.PointOption;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Pause;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
-
-import static driver.DriverBase.getAppiumDriver;
-import static java.time.Duration.ofMillis;
 
 public class TestAppPage extends AppiumBaseScreen {
     @AndroidFindBy(id ="IntegerA")
