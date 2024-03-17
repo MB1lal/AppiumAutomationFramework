@@ -1,11 +1,11 @@
 package steps;
 
+import net.serenitybdd.annotations.Steps;
 import pages.GestureAppPage;
 import pages.TestAppPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.thucydides.core.annotations.Steps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -26,7 +26,7 @@ public class IOSAppSteps extends BaseSteps {
         }
     }
 
-    @When("User presses the sum button")
+    @When("User presses sum button")
     public void pressSumButton() {
         testAppPage.pressSumButton();
     }

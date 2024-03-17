@@ -9,11 +9,9 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <serenity.version>3.2.5</serenity.version>
-        <serenity.cucumber.version>3.2.5</serenity.cucumber.version>
-        <cucumber.version>7.3.3</cucumber.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <serenity.version>4.1.3</serenity.version>
     </properties>
 
     <build>
@@ -83,6 +81,12 @@
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
             <version>3.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.25.3</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

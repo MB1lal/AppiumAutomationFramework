@@ -1,9 +1,11 @@
 package pages;
 
 
-import net.thucydides.core.annotations.Step;
+
+import net.serenitybdd.annotations.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 
 public class HerokuPage extends AppiumBaseScreen {
 

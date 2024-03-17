@@ -2,7 +2,7 @@ package pages;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import net.thucydides.core.annotations.Step;
+import net.serenitybdd.annotations.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
